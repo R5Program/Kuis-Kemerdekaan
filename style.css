@@ -1,0 +1,21 @@
+body {
+	font-family: "Syne", sans-serif;
+}
+
+.fade-up {
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeUp 0.6s forwards;
+}
+@keyframes fadeUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.fade-out {
+	opacity: 0;
+	transform: translateY(-20px);
+	transition: all 0.5s ease;
+}
+/* From Uiverse.io by ercnersoy */
