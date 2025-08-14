@@ -151,6 +151,8 @@ const questions = [
 	{ q: "Negara Jepang menyerah kepada Sekutu pada tanggal ....", options: ["13 Agustus 1945", "14 Agustus 1945", "15 Agustus 1945", "16 Agustus 1945"], answer: 1 },
 	// 20
 	{ q: "Berita Jepang menyerah kepada sekutu diperoleh pemuda Bandung melalui ...", options: ["Majalah", "Koran", "Televisi", "Radio"], answer: 3 },
+	// 21
+	{ q: "Tokoh yang mengusulkan agar naskah proklamasi ditandatangani Ir. Soekarno dan Moh. Hatta atas nama bangsa Indonesia adalah ?", options: ["Wikana", "Soekarni", "HOS. Tjokroaminoto", "Ahmad Soebardjo"], answer: 3 },
 ];
 
 let shuffledQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 10); // Ambil 10 soal acak
