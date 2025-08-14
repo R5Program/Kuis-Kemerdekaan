@@ -31,7 +31,7 @@ const pressureParts = [
 	(name) => `Halo ${name}, pada kuis ini akan diberikan 10 acak dari 100 soal yang sudah disiapkan.`,
 	() => `Soalnya kurang lebih mengenai sejarah Indonesia sampai merdeka.
 Sistemnya Pilihan Ganda, jadi kalau skor kamu dibawah 50 berarti kamu bodoh, idiot, stupid... (becanda hehe).`,
-	() => `Kalau skor kamu dibawah 50 sih, jiwa nasionalisme dipertanyakan sih.`,
+	() => `Kalau skor kamu dibawah 50 sih, jiwa nasionalisme dipertanyakan sih. Semangat dan Jangan Nyontek😁`,
 ];
 
 let pressureIndex = 0;
@@ -111,19 +111,49 @@ noBtn.addEventListener("click", () => {
 
 // ----------------- SOAL -----------------
 const questions = [
+	// 1
 	{ q: "Siapakah proklamator kemerdekaan Indonesia?", options: ["Soekarno & Hatta", "Soekarno & Sjahrir", "Hatta & Tan Malaka", "Soepomo & Yamin"], answer: 0 },
-	{ q: "Kapan Indonesia merdeka?", options: ["17 Agustus 1945", "18 Agustus 1945", "20 Mei 1945", "1 Juni 1945"], answer: 0 },
-	{ q: "Dimana proklamasi kemerdekaan dibacakan?", options: ["Jl. Pegangsaan Timur No. 56", "Istana Merdeka", "Lapangan Ikada", "Gedung Pancasila"], answer: 0 },
-	{ q: "Siapa penulis teks proklamasi?", options: ["Ahmad Soebardjo", "Moh. Yamin", "Soekarno", "Sayuti Melik"], answer: 0 },
+	// 2
+	{ q: "Kapan Indonesia merdeka?", options: ["18 Agustus 1945", "20 Mei 1945", "17 Agustus 1945", "1 Juni 1945"], answer: 2 },
+	// 3
+	{ q: "Dimana proklamasi kemerdekaan dibacakan?", options: ["Istana Merdeka", "Jl. Pegangsaan Timur No. 56", "Lapangan Ikada", "Gedung Pancasila"], answer: 1 },
+	// 4
+	{ q: "Siapa penulis teks proklamasi?", options: ["Moh. Yamin", "Soekarno", "Sayuti Melik", "Ahmad Soebardjo"], answer: 3 },
+	// 5
 	{ q: "Bendera merah putih pertama dijahit oleh?", options: ["Fatmawati", "Kartini", "Cut Nyak Dien", "Dewi Sartika"], answer: 0 },
-	{ q: "Organisasi Budi Utomo berdiri tahun?", options: ["1908", "1928", "1945", "1918"], answer: 0 },
+	// 6
+	{ q: "Organisasi Budi Utomo berdiri tahun?", options: ["1928", "1945", "1908", "1918"], answer: 2 },
+	//
 	{ q: "Sumpah Pemuda diikrarkan pada tahun?", options: ["1928", "1938", "1945", "1918"], answer: 0 },
-	{ q: "Pahlawan dari Aceh yang terkenal?", options: ["Teuku Umar", "Pattimura", "Diponegoro", "Cut Nyak Dien"], answer: 0 },
+	// 8
+	{ q: "Pahlawan dari Aceh yang terkenal?", options: ["Pattimura", "Diponegoro", "Teuku Umar", "KH. Zainal Mustafa"], answer: 2 },
+	// 9
 	{ q: "Siapa Presiden RI ke-2?", options: ["BJ Habibie", "Soeharto", "Gus Dur", "Megawati"], answer: 1 },
-	{ q: "Siapa penjahit bendera pusaka?", options: ["Fatmawati", "Kartini", "Cut Nyak Dien", "Martha Christina Tiahahu"], answer: 0 },
+	// 10
+	{ q: "Siapa yang mengusulkan agar proklamasi dibacakan secepatnya?", options: ["Golongan Muda", "Golongan Tua", "BKR", "PETA"], answer: 0 },
+	// 11
+	{ q: "Peristiwa Rengasdengklok terjadi pada tanggal", options: ["16 Juli 1945", "14 Agustus 1945", "16 Agustus 1945", "15 Agustus 1945"], answer: 2 },
+	// 12
+	{ q: "Negara yang pertama menjajah Indonesia adalah?", options: ["Jepang", "Belanda", "Portugis", "Spanyol"], answer: 2 },
+	// 13
+	{ q: "Siapa yang menjadi Panglima Tertinggi Angkatan Perang Indonesia?", options: ["Soekarno", "Hatta", "Suharto", "Jenderal Sudirman"], answer: 3 },
+	// 14
+	{ q: "Apa nama organisasi yang didirikan oleh Soekarno pada tahun 1927?", options: ["Partai Nasional Indonesia", "Budi Utomo", "Sarekat Islam", "Gerakan Pramuka"], answer: 0 },
+	// 15
+	{ q: "Siapa yang menjadi Ketua PPKI pada saat proklamasi?", options: ["Soekarno", "Hatta", "Sutan Sjahrir", "Radjiman Wediodiningrat"], answer: 0 },
+	// 16
+	{ q: "Apa nama perjanjian yang mengakhiri agresi militer Belanda?", options: ["Perjanjian Linggarjati", "Perjanjian Renville", "Perjanjian Roem-Royen", "Perjanjian KMB"], answer: 2 },
+	// 17
+	{ q: "Apa nama organisasi yang didirikan oleh Dr. Wahidin Sudirohusodo?", options: ["Budi Utomo", "Sarekat Islam", "Partai Nasional Indonesia", "Gerakan Pramuka"], answer: 0 },
+	// 18
+	{ q: "Apa nama organisasi yang didirikan oleh Dr. Sutomo?", options: ["Budi Utomo", "Sarekat Islam", "Partai Nasional Indonesia", "Gerakan Pramuka"], answer: 0 },
+	// 19
+	{ q: "Negara Jepang menyerah kepada Sekutu pada tanggal ....", options: ["13 Agustus 1945", "14 Agustus 1945", "15 Agustus 1945", "16 Agustus 1945"], answer: 1 },
+	// 20
+	{ q: "Berita Jepang menyerah kepada sekutu diperoleh pemuda Bandung melalui ...", options: ["Majalah", "Koran", "Televisi", "Radio"], answer: 3 },
 ];
 
-let shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+let shuffledQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 10); // Ambil 10 soal acak
 let currentIndex = 0;
 let score = 0;
 
@@ -221,7 +251,7 @@ document.getElementById("backBtn").addEventListener("click", () => {
 	currentIndex = 0;
 
 	// Acak ulang pertanyaan
-	shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+	shuffledQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 10);
 
 	// Sembunyikan semua section
 	document.getElementById("resultContainer").classList.add("hidden");
@@ -230,13 +260,14 @@ document.getElementById("backBtn").addEventListener("click", () => {
 	readyPage.classList.add("hidden");
 
 	// Tampilkan intro
-	document.getElementById("intro").classList.remove("hidden");
+	intro.classList.remove("hidden");
+	intro.classList.add("fade-up");
 });
 
 document.getElementById("retryBtn").addEventListener("click", () => {
 	score = 0;
 	currentIndex = 0;
-	shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+	shuffledQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 10); // Acak ulang pertanyaan
 	document.getElementById("resultContainer").classList.add("hidden");
 	quizPage.classList.remove("hidden");
 	showQuestion(currentIndex);
