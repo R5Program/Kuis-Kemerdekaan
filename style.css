@@ -19,3 +19,9 @@ body {
 	transition: all 0.5s ease;
 }
 /* From Uiverse.io by ercnersoy */
+#pressureText {
+	white-space: pre-line; /* Baca \n sebagai enter */
+	max-width: 600px; /* Biar nggak kepanjangan */
+	margin: 0 auto; /* Tengah */
+	text-align: center; /* Kalau mau rata tengah */
+}

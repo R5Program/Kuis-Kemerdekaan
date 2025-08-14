@@ -1,37 +1,88 @@
+// Ambil elemen
 const startBtn = document.getElementById("startBtn");
 const intro = document.getElementById("intro");
 const nameForm = document.getElementById("nameForm");
-
-startBtn.addEventListener("click", () => {
-	// Animasi keluar intro
-	intro.classList.add("fade-out");
-	setTimeout(() => {
-		intro.style.display = "none"; // hilangkan intro
-		nameForm.classList.remove("hidden"); // tampilkan form
-		nameForm.style.animationDelay = "0s"; // langsung animasi
-	}, 500); // tunggu animasi keluar selesai
-});
-
-// const startBtn = document.getElementById("startBtn");
-// const nameForm = document.getElementById("nameForm");
 const submitName = document.getElementById("submitName");
 const quizPage = document.getElementById("quizPage");
 const welcomeText = document.getElementById("welcomeText");
 
+// Halaman tambahan
+const pressurePage = document.getElementById("pressurePage");
+const readyPage = document.getElementById("readyPage");
+const pressureText = document.getElementById("pressureText");
+const continueBtn = document.getElementById("continueBtn");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+// Mulai → ke form nama
 startBtn.addEventListener("click", () => {
-	document.getElementById("landingPage").classList.add("hidden");
-	nameForm.classList.remove("hidden");
+	intro.classList.add("fade-out");
+	setTimeout(() => {
+		intro.classList.add("hidden");
+		nameForm.classList.remove("hidden");
+		nameForm.classList.add("fade-up");
+	}, 500);
 });
 
+// ======== TEKS PRESSURE PER BAGIAN ========
+const pressureParts = [
+	(name) => `Halo ${name}, pada kuis ini akan diberikan 10 acak dari 100 soal yang sudah disiapkan.`,
+	() => `Soalnya kurang lebih mengenai sejarah Indonesia sampai merdeka.
+Sistemnya Pilihan Ganda, jadi kalau skor kamu dibawah 50 berarti kamu bodoh, idiot, stupid... (becanda hehe).`,
+	() => `Kalau skor kamu dibawah 50 sih, jiwa nasionalisme dipertanyakan sih.`,
+];
+
+let pressureIndex = 0;
+
+// Submit nama → ke pressurePage (bagian pertama)
 submitName.addEventListener("click", () => {
 	const name = nameForm.querySelector("input").value.trim();
-	if (name) {
-		nameForm.classList.add("hidden");
-		welcomeText.textContent = `Selamat datang ${name}`;
-		quizPage.classList.remove("hidden");
+	if (!name) return;
+
+	nameForm.classList.add("hidden");
+	pressureIndex = 0;
+	showPressurePart(name);
+	pressurePage.classList.remove("hidden");
+});
+
+function showPressurePart(name) {
+	pressureText.classList.remove("fade-up");
+	void pressureText.offsetWidth; // reset animasi
+	pressureText.textContent = pressureParts[pressureIndex](name);
+	pressureText.classList.add("fade-up");
+}
+
+// Klik tombol lanjut di pressure
+continueBtn.addEventListener("click", () => {
+	const name = nameForm.querySelector("input").value.trim();
+	pressureIndex++;
+
+	if (pressureIndex < pressureParts.length) {
+		showPressurePart(name);
+	} else {
+		// Kalau sudah habis → ke ready page
+		pressurePage.classList.add("hidden");
+		readyPage.classList.remove("hidden");
+		readyPage.classList.add("fade-up");
 	}
 });
 
+// Ready YA → mulai kuis
+yesBtn.addEventListener("click", () => {
+	readyPage.classList.add("hidden");
+	quizPage.classList.remove("hidden");
+	quizPage.classList.add("fade-up");
+	showQuestion(currentIndex);
+});
+
+// Ready TIDAK → balik intro
+noBtn.addEventListener("click", () => {
+	alert("Oke, balik lagi kalau udah siap!");
+	readyPage.classList.add("hidden");
+	intro.classList.remove("hidden");
+});
+
+// ----------------- SOAL -----------------
 const questions = [
 	{ q: "Siapakah proklamator kemerdekaan Indonesia?", options: ["Soekarno & Hatta", "Soekarno & Sjahrir", "Hatta & Tan Malaka", "Soepomo & Yamin"], answer: 0 },
 	{ q: "Kapan Indonesia merdeka?", options: ["17 Agustus 1945", "18 Agustus 1945", "20 Mei 1945", "1 Juni 1945"], answer: 0 },
@@ -45,30 +96,28 @@ const questions = [
 	{ q: "Siapa penjahit bendera pusaka?", options: ["Fatmawati", "Kartini", "Cut Nyak Dien", "Martha Christina Tiahahu"], answer: 0 },
 ];
 
-// Acak urutan soal
 let shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
 let currentIndex = 0;
+let score = 0;
+
 const optionsContainer = document.getElementById("optionsContainer");
 const nextBtn = document.getElementById("nextBtn");
 const questionForm = document.getElementById("questionForm");
 
+// Tampilkan soal
 function showQuestion(index) {
 	const q = shuffledQuestions[index];
 	const questionText = document.getElementById("questionText");
 
-	// Biar animasi bisa di-retrigger tiap kali soal ganti
 	questionText.classList.remove("fade-up");
-	void questionText.offsetWidth; // trik reset animasi
+	void questionText.offsetWidth;
 	questionText.classList.add("fade-up");
 
 	questionText.textContent = q.q;
-
-	// Reset pilihan & tombol
 	optionsContainer.innerHTML = "";
 	nextBtn.disabled = true;
 	nextBtn.className = "px-4 py-2 rounded bg-gray-500 text-black cursor-not-allowed border border-transparent";
 
-	// Render opsi
 	q.options.forEach((opt, i) => {
 		const label = document.createElement("label");
 		label.className = "flex items-center space-x-3 border rounded px-4 py-2 cursor-pointer bg-white text-black";
@@ -87,41 +136,19 @@ function showQuestion(index) {
 		optionsContainer.appendChild(label);
 	});
 
-	// Efek animasi juga buat opsi jawaban
 	optionsContainer.classList.remove("fade-up");
 	void optionsContainer.offsetWidth;
 	optionsContainer.classList.add("fade-up");
 }
 
-// Enable tombol saat pilih jawaban
+// Enable tombol saat pilih
 questionForm.addEventListener("change", () => {
 	nextBtn.disabled = false;
 	nextBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
 	nextBtn.classList.add("bg-white");
 });
 
-// Saat klik next
-// nextBtn.addEventListener("click", (e) => {
-// 	e.preventDefault();
-// 	const selected = questionForm.querySelector("input[name='answer']:checked");
-// 	if (!selected) return; // safety, kalau belum pilih
-
-// 	currentIndex++;
-// 	if (currentIndex < shuffledQuestions.length) {
-// 		showQuestion(currentIndex);
-// 	} else {
-// 		alert("Kuis selesai!");
-// 	}
-// });
-
-// Tampilkan soal pertama
-showQuestion(currentIndex);
-
-// Tambah score
-let score = 0;
-
-// Saat klik Next (dan jawabannya benar, tambah score)
-// Hapus listener Next yang lama (yang ada alert-nya)
+// Klik next
 nextBtn.addEventListener("click", (e) => {
 	e.preventDefault();
 	const selected = questionForm.querySelector("input[name='answer']:checked");
@@ -140,14 +167,15 @@ nextBtn.addEventListener("click", (e) => {
 	}
 });
 
+// Hasil
 function showResult() {
-	document.getElementById("quizPage").classList.add("hidden");
+	quizPage.classList.add("hidden");
 	document.getElementById("resultContainer").classList.remove("hidden");
 
 	let finalDisplay = document.getElementById("finalScore");
 	let start = 0;
 	let end = score;
-	let duration = 800; // durasi animasi dalam ms
+	let duration = 800;
 	let startTime = null;
 
 	function animateScore(timestamp) {
@@ -155,12 +183,7 @@ function showResult() {
 		let progress = Math.min((timestamp - startTime) / duration, 1);
 		let value = Math.floor(progress * (end - start) + start);
 		finalDisplay.textContent = value;
-
-		if (progress < 1) {
-			requestAnimationFrame(animateScore);
-		}
+		if (progress < 1) requestAnimationFrame(animateScore);
 	}
-
-	// Mulai animasi
 	requestAnimationFrame(animateScore);
 }
