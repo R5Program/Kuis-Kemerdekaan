@@ -45,7 +45,7 @@
 		</div>
 
 		<!-- Halaman Siap -->
-		<div id="readyPage" class="hidden flex flex-col items-center fade-up">
+		<div id="readyPage" class="hidden flex flex-col items-center justify-center relative fade-up h-screen">
 			<h2 class="text-white text-2xl text-center mb-6">Apakah kamu siap?</h2>
 			<div class="flex space-x-4">
 				<button id="yesBtn" class="px-5 py-2 rounded-lg border border-green-400 text-green-400 hover:bg-green-400 hover:text-black transition">YA</button>
@@ -56,7 +56,7 @@
 		<!-- Halaman Soal -->
 		<div id="quizPage" class="hidden flex flex-col items-start text-white fade-up px-6">
 			<!-- Header tetap -->
-			<h2 id="welcomeText" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4">Selamat datang</h2>
+			<h2 id="welcomeText" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4"></h2>
 
 			<!-- Soal dinamis -->
 			<form id="questionForm" class="w-full">
@@ -69,10 +69,16 @@
 		<!-- Container hasil -->
 		<div id="resultContainer" class="hidden flex flex-col items-center justify-center h-full">
 			<h2 class="text-2xl text-white font-bold mb-4">Score</h2>
-			<div class="w-32 h-32 rounded-full border flex items-center justify-center text-3xl font-bold">
+			<div class="w-32 h-32 rounded-full border flex items-center justify-center text-3xl font-bold mb-6">
 				<span id="finalScore" class="text-white">0</span>
 			</div>
+
+			<div class="flex space-x-4">
+				<button id="backBtn" class="px-4 py-2 bg-red-500 rounded text-white hover:bg-red-600 transition">Kembali</button>
+				<button id="retryBtn" class="px-4 py-2 bg-green-500 rounded text-white hover:bg-green-600 transition">Ulang</button>
+			</div>
 		</div>
+
 		<script src="script.js"></script>
 	</body>
 </html>

@@ -1,4 +1,6 @@
 // Ambil elemen
+const backBtn = document.getElementById("backBtn");
+const retryBtn = document.getElementById("retryBtn");
 const startBtn = document.getElementById("startBtn");
 const intro = document.getElementById("intro");
 const nameForm = document.getElementById("nameForm");
@@ -39,6 +41,8 @@ submitName.addEventListener("click", () => {
 	const name = nameForm.querySelector("input").value.trim();
 	if (!name) return;
 
+	welcomeText.textContent = `Selamat datang, ${name}!`;
+
 	nameForm.classList.add("hidden");
 	pressureIndex = 0;
 	showPressurePart(name);
@@ -73,6 +77,29 @@ yesBtn.addEventListener("click", () => {
 	quizPage.classList.remove("hidden");
 	quizPage.classList.add("fade-up");
 	showQuestion(currentIndex);
+});
+
+// Efek tombol "TIDAK" kabur
+let hasMoved = false;
+
+noBtn.addEventListener("mouseenter", () => {
+	const container = readyPage.getBoundingClientRect();
+	const btnWidth = noBtn.offsetWidth;
+	const btnHeight = noBtn.offsetHeight;
+
+	if (!hasMoved) {
+		noBtn.style.position = "absolute"; // jadi absolute setelah hover
+		hasMoved = true;
+	}
+
+	const maxX = container.width - btnWidth - 20;
+	const maxY = container.height - btnHeight - 20;
+
+	const randomX = Math.floor(Math.random() * maxX);
+	const randomY = Math.floor(Math.random() * maxY);
+
+	noBtn.style.left = `${randomX}px`;
+	noBtn.style.top = `${randomY}px`;
 });
 
 // Ready TIDAK → balik intro
@@ -187,3 +214,30 @@ function showResult() {
 	}
 	requestAnimationFrame(animateScore);
 }
+
+// Event listener tombol kembali & ulang
+document.getElementById("backBtn").addEventListener("click", () => {
+	score = 0;
+	currentIndex = 0;
+
+	// Acak ulang pertanyaan
+	shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+
+	// Sembunyikan semua section
+	document.getElementById("resultContainer").classList.add("hidden");
+	quizPage.classList.add("hidden");
+	pressurePage.classList.add("hidden");
+	readyPage.classList.add("hidden");
+
+	// Tampilkan intro
+	document.getElementById("intro").classList.remove("hidden");
+});
+
+document.getElementById("retryBtn").addEventListener("click", () => {
+	score = 0;
+	currentIndex = 0;
+	shuffledQuestions = [...questions].sort(() => Math.random() - 0.5);
+	document.getElementById("resultContainer").classList.add("hidden");
+	quizPage.classList.remove("hidden");
+	showQuestion(currentIndex);
+});
