@@ -30,8 +30,10 @@ startBtn.addEventListener("click", () => {
 const pressureParts = [
 	(name) => `Halo ${name}, pada kuis ini akan diberikan 10 acak dari 100 soal yang sudah disiapkan.`,
 	() => `Soalnya kurang lebih mengenai sejarah Indonesia sampai merdeka.
-Sistemnya Pilihan Ganda, jadi kalau skor kamu dibawah 50 berarti kamu bodoh, idiot, stupid... (becanda hehe).`,
+Sistemnya Pilihan Ganda, jadi kalau skor kamu dibawah 50 berarti kamu bodoh, idiot, stupid, ga suka menabung, sombong.....`,
+	() => `becanda hehe........`,
 	() => `Kalau skor kamu dibawah 50 sih, jiwa nasionalisme dipertanyakan sih. Semangat dan Jangan Nyontek😁`,
+	() => `<span class = text-2xl font-bold>JANGAN NYONTEK!</span>`,
 ];
 
 let pressureIndex = 0;
@@ -52,7 +54,7 @@ submitName.addEventListener("click", () => {
 function showPressurePart(name) {
 	pressureText.classList.remove("fade-up");
 	void pressureText.offsetWidth; // reset animasi
-	pressureText.textContent = pressureParts[pressureIndex](name);
+	pressureText.innerHTML = pressureParts[pressureIndex](name);
 	pressureText.classList.add("fade-up");
 }
 
@@ -107,6 +109,7 @@ noBtn.addEventListener("click", () => {
 	alert("Oke, balik lagi kalau udah siap!");
 	readyPage.classList.add("hidden");
 	intro.classList.remove("hidden");
+	intro.classList.add("fade-up");
 });
 
 // ----------------- SOAL -----------------

@@ -25,3 +25,8 @@ body {
 	margin: 0 auto; /* Tengah */
 	text-align: center; /* Kalau mau rata tengah */
 }
+#backBtn,
+#retryBtn {
+	position: relative;
+	z-index: 50; /* pastikan di atas elemen lain */
+}
