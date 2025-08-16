@@ -28,12 +28,12 @@ startBtn.addEventListener("click", () => {
 
 // ======== TEKS PRESSURE PER BAGIAN ========
 const pressureParts = [
-	(name) => `Halo ${name}, pada kuis ini akan diberikan 10 acak dari 100 soal yang sudah disiapkan.`,
+	(name) => `Halo ${name}, pada kuis ini akan diberikan 10 soal acak dari 50 soal yang sudah disiapkan.`,
 	() => `Soalnya kurang lebih mengenai sejarah Indonesia sampai merdeka.
 Sistemnya Pilihan Ganda, jadi kalau skor kamu dibawah 50 berarti kamu bodoh, idiot, stupid, ga suka menabung, sombong.....`,
 	() => `becanda hehe........`,
 	() => `Kalau skor kamu dibawah 50 sih, jiwa nasionalisme dipertanyakan sih. Semangat dan Jangan Nyontek😁`,
-	() => `<span class = text-2xl font-bold>JANGAN NYONTEK!</span>`,
+	() => `<span class = text-4xl font-bold>JANGAN NYONTEK!</span>`,
 ];
 
 let pressureIndex = 0;
@@ -156,6 +156,40 @@ const questions = [
 	{ q: "Berita Jepang menyerah kepada sekutu diperoleh pemuda Bandung melalui ...", options: ["Majalah", "Koran", "Televisi", "Radio"], answer: 3 },
 	// 21
 	{ q: "Tokoh yang mengusulkan agar naskah proklamasi ditandatangani Ir. Soekarno dan Moh. Hatta atas nama bangsa Indonesia adalah ?", options: ["Wikana", "Soekarni", "HOS. Tjokroaminoto", "Ahmad Soebardjo"], answer: 3 },
+	// 22
+	{ q: "Naskah proklamasi ditulis di rumah?", options: ["Laksamana Maeda", "Ir. Soekarno", "Moh. Hatta", "Sutan Syahrir"], answer: 0 },
+	// 23
+	{ q: "Siapa tokoh yang dikenal sebagai Bapak Pendidikan Nasional Indonesia?", options: ["Ir. Soekarno", "Ki Hajar Dewantara", "Moh. Hatta", "Dr. Soepomo"], answer: 1 },
+	// 24
+	{ q: "Siapakah pahlawan nasional wanita dari Aceh yang terkenal memimpin perlawanan melawan Belanda?", options: ["Martha Christina Tiahahu", "R.A. Kartini", "Cut Nyak Dien", "Dewi Sartika"], answer: 2 },
+	// 25
+	{ q: "Kapan Belanda secara resmi mengakui kemerdekaan Indonesia?", options: ["17 Agustus 1945", "27 Desember 1949", "1 Juni 1945", "10 November 1945"], answer: 1 },
+	// 26
+	{ q: "Apa tujuan utama dibentuknya PPKI?", options: ["Membentuk Tentara Nasional", "Menyusun Undang-Undang Dasar dan melantik Presiden", "Mengusir Belanda", "Membentuk organisasi pemuda"], answer: 1 },
+	// 27
+	{ q: "Siapakah presiden pertama Republik Indonesia?", options: ["Soeharto", "BJ Habibie", "Megawati Soekarnoputri", "Ir. Soekarno"], answer: 3 },
+	// 28
+	{ q: "G30S/PKI terjadi pada tahun?", options: ["1960", "1965", "1970", "1975"], answer: 1 },
+	// 29
+	{ q: "Pancasila ditetapkan secara resmi sebagai dasar negara pada tanggal?", options: ["17 Agustus 1945", "1 Juni 1945", "18 Agustus 1945", "22 Juni 1945"], answer: 2 },
+	// 30
+	{ q: "Siapa tokoh yang dikenal sebagai Bapak Koperasi Indonesia?", options: ["Soekarno", "Mohammad Hatta", "Ki Hajar Dewantara", "Soeharto"], answer: 1 },
+	// 31
+	{ q: "Proklamasi Kemerdekaan Indonesia dibacakan pada pukul …", options: ["09.00 WIB", "10.00 WIB", "11.00 WIB", "12.00 WIB"], answer: 1 },
+	// 32
+	{ q: "Ibukota Indonesia dipindahkan dari Jakarta ke Yogyakarta pada tahun …", options: ["1946", "1947", "1948", "1949"], answer: 0 },
+	// 33
+	{ q: "Siapakah yang mengetik naskah Proklamasi?", options: ["Sayuti Melik", "BM Diah", "Sutan Syahrir", "Latief Hendraningrat"], answer: 0 },
+	// 34
+	{ q: "Lagu kebangsaan Indonesia Raya pertama kali diperdengarkan pada …", options: ["Kongres Pemuda I", "Kongres Pemuda II", "Proklamasi", "Sidang PPKI"], answer: 1 },
+	// 35
+	{ q: "Penjajahan Jepang di Indonesia berlangsung dari tahun…", options: ["1941-1945", "1942-1945", "1943-1946", "1944-1947"], answer: 1 },
+	// 36
+	{ q: "Pertempuran 10 November di Surabaya diperingati sebagai Hari…", options: ["Pendidikan Nasional", "Kebangkitan Nasional", "Pahlawan", "Kemerdekaan"], answer: 2 },
+	// 37
+	{ q: "Dasar negara Indonesia yang dikenal dengan nama Pancasila pertama kali dicetuskan oleh …", options: ["Moh. Hatta", "Supomo", "Soekarno", "Muhammad Yamin"], answer: 2 },
+	// 38
+	{ q: "Tokoh yang terkenal dengan semboyan 'Ing ngarsa sung tulada, ing madya mangun karsa, tut wuri handayani' adalah …", options: ["Ki Hajar Dewantara", "Moh. Hatta", "Soekarno", "RA Kartini"], answer: 0 },
 ];
 
 let shuffledQuestions = [...questions].sort(() => Math.random() - 0.5).slice(0, 10); // Ambil 10 soal acak
@@ -277,3 +311,23 @@ document.getElementById("retryBtn").addEventListener("click", () => {
 	quizPage.classList.remove("hidden");
 	showQuestion(currentIndex);
 });
+function resetQuiz(startOver = false) {
+	score = 0;
+	currentIndex = 0;
+	shuffledQuestions = getRandomQuestions();
+
+	el.resultContainer.classList.add("hidden");
+	el.quizPage.classList.add("hidden");
+	el.pressurePage.classList.add("hidden");
+	el.readyPage.classList.add("hidden");
+
+	if (startOver) {
+		show(el.quizPage);
+		showQuestion(currentIndex);
+	} else {
+		show(el.intro);
+	}
+}
+
+el.backBtn.addEventListener("click", () => resetQuiz(false));
+el.retryBtn.addEventListener("click", () => resetQuiz(true));
